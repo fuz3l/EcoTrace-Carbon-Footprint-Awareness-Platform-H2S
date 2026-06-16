@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoTrace — Track your impact. Shape your future.</title>
+  <meta name="description" content="EcoTrace uses Gemini AI to help you measure, understand, and reduce your personal carbon footprint. Built for Google PropTWars Hack 2.">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+    connect-src https://generativelanguage.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+  ">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Top App Bar -->
+  <header class="top-app-bar" role="banner">
+    <a href="index.html" class="top-app-bar__brand" aria-label="EcoTrace home">
+      <img src="assets/logo.svg" alt="" width="28" height="34" aria-hidden="true">
+      <span class="top-app-bar__wordmark">Eco<span>Trace</span></span>
+    </a>
+    <nav class="top-app-bar__nav" aria-label="Main navigation">
+      <a href="index.html" class="active" aria-current="page">Home</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tips.html">AI Tips</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="bottom-nav">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </header>
+
+  <!-- Bottom Nav (mobile) -->
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="bottom-nav__item active" aria-current="page">
+      <span class="indicator"><span class="material-symbols-outlined">home</span></span>
+      <span>Home</span>
+    </a>
+    <a href="calculator.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">calculate</span></span>
+      <span>Calculator</span>
+    </a>
+    <a href="dashboard.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">insights</span></span>
+      <span>Dashboard</span>
+    </a>
+    <a href="tips.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">eco</span></span>
+      <span>AI Tips</span>
+    </a>
+  </nav>
+
+  <main id="main" class="page-wrap">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero__eyebrow">
+        <span class="material-symbols-outlined" style="font-size:14px">eco</span>
+        Built for Google PropTWars Hack 2
+      </div>
+      <h1 id="hero-heading">Know your <em>carbon.</em><br>Change your story.</h1>
+      <p class="hero__sub">
+        EcoTrace uses AI to help you understand and reduce your everyday carbon footprint.
+        Track transport, energy, diet, and shopping — all in one place.
+      </p>
+      <div class="hero__cta">
+        <a href="calculator.html" class="btn btn--filled" id="cta-calculate">
+          <span class="material-symbols-outlined">calculate</span>
+          Calculate my footprint
+        </a>
+        <a href="#features" class="btn btn--outlined" id="cta-learn">
+          <span class="material-symbols-outlined">info</span>
+          See how it works
+        </a>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features-section" aria-labelledby="features-heading">
+      <h2 id="features-heading">Everything you need to go green</h2>
+      <div class="features-grid">
+        <article class="card feature-card">
+          <div class="feature-card__icon" aria-hidden="true">
+            <span class="material-symbols-outlined">calculate</span>
+          </div>
+          <h3>Calculate</h3>
+          <p>Input your monthly transport, energy, diet, and shopping habits to get an accurate CO₂ estimate.</p>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-card__icon" aria-hidden="true">
+            <span class="material-symbols-outlined">insights</span>
+          </div>
+          <h3>Track</h3>
+          <p>Visualize your footprint over time with beautiful charts. See trends and compare with averages.</p>
+        </article>
+        <article class="card feature-card">
+          <div class="feature-card__icon" aria-hidden="true">
+            <span class="material-symbols-outlined">eco</span>
+          </div>
+          <h3>Improve</h3>
+          <p>Get smart, personalized tips based on your actual emission data — instantly, with no account or API key needed.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Stats Comparison -->
+    <section class="stats-section" aria-labelledby="stats-heading">
+      <h2 id="stats-heading">How do you compare?</h2>
+      <div class="stats-grid">
+        <div class="stat-col">
+          <div class="num" aria-label="125 kilograms per month">125 kg</div>
+          <div class="lbl">/ month — India average</div>
+        </div>
+        <div class="stats-vs" aria-hidden="true">VS</div>
+        <div class="stat-col">
+          <div class="num" aria-label="333 kilograms per month">333 kg</div>
+          <div class="lbl">/ month — World average</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section style="text-align:center; padding:64px 24px; background:var(--md-surface-1);">
+      <h2 style="font:400 32px/40px var(--font-display); margin-bottom:16px;">
+        Ready to measure your impact?
+      </h2>
+      <p style="font:400 16px/24px var(--font-body); color:var(--md-on-surface-variant); margin-bottom:32px;">
+        It takes under 2 minutes. No account needed.
+      </p>
+      <a href="calculator.html" class="btn btn--filled" id="cta-bottom" style="height:52px; padding:0 36px; font-size:16px;">
+        <span class="material-symbols-outlined">arrow_forward</span>
+        Start now — it's free
+      </a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <p>Built for <strong>Google PromptWars H2S</strong> &copy; 2025 EcoTrace</p>
+  </footer>
+
+  <script type="module" src="js/ripple.js"></script>
+  <script>
+    /* Top app bar elevation on scroll */
+    const bar = document.querySelector('.top-app-bar');
+    window.addEventListener('scroll', () => {
+      bar.classList.toggle('elevated', window.scrollY > 4);
+    }, { passive: true });
+  </script>
+</body>
+</html>

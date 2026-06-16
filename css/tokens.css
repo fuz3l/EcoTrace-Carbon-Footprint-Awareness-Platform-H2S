@@ -1,0 +1,112 @@
+/* =============================================================
+   EcoTrace — Material Design 3 Token System
+   tokens.css
+   ============================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
+/* ── Color Tokens ─────────────────────────────────────────── */
+:root {
+  /* Primary — Green tonal */
+  --md-primary:              #146C3C;
+  --md-on-primary:           #FFFFFF;
+  --md-primary-container:    #B7F1C8;
+  --md-on-primary-container: #002111;
+
+  /* Secondary */
+  --md-secondary:              #4E6356;
+  --md-on-secondary:           #FFFFFF;
+  --md-secondary-container:    #D0E8D7;
+  --md-on-secondary-container: #0B1F13;
+
+  /* Tertiary */
+  --md-tertiary:              #3B6470;
+  --md-on-tertiary:           #FFFFFF;
+  --md-tertiary-container:    #BEEAF7;
+  --md-on-tertiary-container: #001F27;
+
+  /* Error */
+  --md-error:              #BA1A1A;
+  --md-on-error:           #FFFFFF;
+  --md-error-container:    #FFDAD6;
+  --md-on-error-container: #410002;
+
+  /* Surface */
+  --md-background:       #F8FAF7;
+  --md-surface:          #F8FAF7;
+  --md-surface-variant:  #DCE5DC;
+  --md-on-surface:       #191C1A;
+  --md-on-surface-variant: #404943;
+  --md-outline:          #707973;
+  --md-outline-variant:  #C0C9C0;
+
+  /* Elevation surfaces (tonal) */
+  --md-surface-1: #ECF3EB;   /* cards */
+  --md-surface-2: #E4EEE3;   /* nav, top app bar */
+  --md-surface-3: #DCEADB;   /* modals */
+
+  /* Shadows */
+  --md-shadow:   0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.08);
+  --md-shadow-2: 0 3px 6px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.08);
+  --md-shadow-3: 0 8px 24px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.08);
+
+  /* ── Typography ──────────────────────────────────────────── */
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body:    "Roboto", sans-serif;
+
+  /* ── Shape Scale ─────────────────────────────────────────── */
+  --shape-none:        0px;
+  --shape-extra-small: 4px;
+  --shape-small:       8px;
+  --shape-medium:      12px;
+  --shape-large:       16px;
+  --shape-extra-large: 28px;
+  --shape-full:        9999px;
+
+  /* ── Motion ──────────────────────────────────────────────── */
+  --motion-standard:   cubic-bezier(0.2, 0, 0, 1);
+  --motion-decelerate: cubic-bezier(0, 0, 0, 1);
+  --motion-accelerate: cubic-bezier(0.3, 0, 1, 1);
+
+  /* ── Gauge custom prop ───────────────────────────────────── */
+  --gauge-pct: 0;
+}
+
+/* ── Typography utility classes ──────────────────────────── */
+.display-large  { font-family: var(--font-display); font-size: 57px; line-height: 64px; letter-spacing: -0.25px; font-weight: 400; }
+.display-medium { font-family: var(--font-display); font-size: 45px; line-height: 52px; letter-spacing: 0;       font-weight: 400; }
+.headline-large  { font-family: var(--font-display); font-size: 32px; line-height: 40px; letter-spacing: 0;       font-weight: 400; }
+.headline-medium { font-family: var(--font-display); font-size: 28px; line-height: 36px; letter-spacing: 0;       font-weight: 400; }
+.title-large   { font-family: var(--font-display); font-size: 22px; line-height: 28px; letter-spacing: 0;       font-weight: 400; }
+.title-medium  { font-family: var(--font-display); font-size: 16px; line-height: 24px; letter-spacing: 0.15px;  font-weight: 500; }
+.body-large    { font-family: var(--font-body);    font-size: 16px; line-height: 24px; letter-spacing: 0.5px;   font-weight: 400; }
+.body-medium   { font-family: var(--font-body);    font-size: 14px; line-height: 20px; letter-spacing: 0.25px;  font-weight: 400; }
+.label-large   { font-family: var(--font-body);    font-size: 14px; line-height: 20px; letter-spacing: 0.1px;   font-weight: 500; }
+.label-medium  { font-family: var(--font-body);    font-size: 12px; line-height: 16px; letter-spacing: 0.5px;   font-weight: 500; }
+
+/* ── Global reset & base ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--md-background);
+  color: var(--md-on-surface);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Eco Tips — EcoTrace</title>
+  <meta name="description" content="Get personalized carbon reduction tips powered by Gemini AI, tailored to your biggest emission sources.">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+  ">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="top-app-bar" role="banner">
+    <a href="index.html" class="top-app-bar__brand" aria-label="EcoTrace home">
+      <img src="assets/logo.svg" alt="" width="28" height="34" aria-hidden="true">
+      <span class="top-app-bar__wordmark">Eco<span>Trace</span></span>
+    </a>
+    <nav class="top-app-bar__nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tips.html" class="active" aria-current="page">AI Tips</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </header>
+
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">home</span></span>
+      <span>Home</span>
+    </a>
+    <a href="calculator.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">calculate</span></span>
+      <span>Calculator</span>
+    </a>
+    <a href="dashboard.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">insights</span></span>
+      <span>Dashboard</span>
+    </a>
+    <a href="tips.html" class="bottom-nav__item active" aria-current="page">
+      <span class="indicator"><span class="material-symbols-outlined">eco</span></span>
+      <span>AI Tips</span>
+    </a>
+  </nav>
+
+  <main id="main" class="page-wrap">
+    <div class="tips-wrap">
+
+      <div class="tips-header">
+        <div class="tips-header-left">
+          <h1 class="headline-large">Eco Tips</h1>
+          <span class="gemini-badge" aria-label="Smart Tips — no API key required">
+            <span class="material-symbols-outlined" style="font-size:16px;color:var(--md-primary)">eco</span>
+            Smart Tips &nbsp;·&nbsp; No API key required
+          </span>
+          <p class="body-large" style="color:var(--md-on-surface-variant); max-width:560px;">
+            Personalized tips based on your highest emission categories — all local, no internet needed.
+          </p>
+        </div>
+        <button class="btn btn--outlined" id="refresh-btn" aria-label="Shuffle new tips">
+          <span class="material-symbols-outlined">refresh</span>
+          Refresh tips
+        </button>
+      </div>
+
+      <!-- Tips container (skeleton → content | error) -->
+      <div class="tips-grid" id="tips-container" aria-live="polite" aria-busy="true">
+        <!-- Populated by tips.js -->
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module" src="js/ripple.js"></script>
+  <script type="module" src="js/tips.js"></script>
+</body>
+</html>

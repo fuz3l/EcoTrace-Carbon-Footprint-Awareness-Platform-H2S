@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carbon Calculator — EcoTrace</title>
+  <meta name="description" content="Calculate your monthly carbon footprint from transport, energy, diet, and shopping. See your live CO₂ gauge update in real time.">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+    connect-src https://generativelanguage.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+  ">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="top-app-bar" role="banner">
+    <a href="index.html" class="top-app-bar__brand" aria-label="EcoTrace home">
+      <img src="assets/logo.svg" alt="" width="28" height="34" aria-hidden="true">
+      <span class="top-app-bar__wordmark">Eco<span>Trace</span></span>
+    </a>
+    <nav class="top-app-bar__nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="calculator.html" class="active" aria-current="page">Calculator</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="tips.html">AI Tips</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </header>
+
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">home</span></span>
+      <span>Home</span>
+    </a>
+    <a href="calculator.html" class="bottom-nav__item active" aria-current="page">
+      <span class="indicator"><span class="material-symbols-outlined">calculate</span></span>
+      <span>Calculator</span>
+    </a>
+    <a href="dashboard.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">insights</span></span>
+      <span>Dashboard</span>
+    </a>
+    <a href="tips.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">eco</span></span>
+      <span>AI Tips</span>
+    </a>
+  </nav>
+
+  <main id="main" class="page-wrap">
+    <div class="calculator-layout">
+
+      <!-- Left: Form -->
+      <div class="calc-form-col">
+        <div style="margin-bottom: 8px;">
+          <h1 class="headline-large">Carbon Calculator</h1>
+          <p class="body-large" style="color:var(--md-on-surface-variant); margin-top:6px;">
+            Enter your monthly activity to calculate your CO₂ footprint.
+          </p>
+        </div>
+
+        <!-- Transport -->
+        <section class="calc-section" aria-labelledby="transport-heading">
+          <div class="section-header">
+            <span class="material-symbols-outlined" aria-hidden="true">directions_car</span>
+            <h2 id="transport-heading">Transport</h2>
+          </div>
+          <div class="field-group">
+
+            <!-- Car -->
+            <div class="field-row">
+              <div class="field-wrap">
+                <label for="car-km">Car distance</label>
+                <div class="input-box">
+                  <span class="field-icon material-symbols-outlined" aria-hidden="true">directions_car</span>
+                  <input type="number" id="car-km" name="car-km"
+                    min="0" max="5000" step="1" value="0"
+                    placeholder="0"
+                    aria-describedby="car-km-hint">
+                  <span class="input-unit">km / month</span>
+                </div>
+              </div>
+              <div class="slider-row" aria-hidden="true">
+                <input type="range" id="car-km-slider" min="0" max="2000" step="10" value="0"
+                  aria-label="Car distance slider" tabindex="-1">
+                <span class="slider-val" id="car-km-val">0</span>
+              </div>
+              <p id="car-km-hint" class="label-medium" style="color:var(--md-on-surface-variant)">0 – 5,000 km</p>
+            </div>
+
+            <!-- Flight -->
+            <div class="field-row">
+              <div class="field-wrap">
+                <label for="flight-km">Flight distance</label>
+                <div class="input-box">
+                  <span class="field-icon material-symbols-outlined" aria-hidden="true">flight</span>
+                  <input type="number" id="flight-km" name="flight-km"
+                    min="0" max="50000" step="10" value="0"
+                    placeholder="0"
+                    aria-describedby="flight-km-hint">
+                  <span class="input-unit">km / month</span>
+                </div>
+              </div>
+              <div class="slider-row" aria-hidden="true">
+                <input type="range" id="flight-km-slider" min="0" max="10000" step="50" value="0"
+                  aria-label="Flight distance slider" tabindex="-1">
+                <span class="slider-val" id="flight-km-val">0</span>
+              </div>
+              <p id="flight-km-hint" class="label-medium" style="color:var(--md-on-surface-variant)">0 – 50,000 km</p>
+            </div>
+
+            <!-- Public transport -->
+            <div class="field-row">
+              <div class="field-wrap">
+                <label for="public-km">Public transport</label>
+                <div class="input-box">
+                  <span class="field-icon material-symbols-outlined" aria-hidden="true">train</span>
+                  <input type="number" id="public-km" name="public-km"
+                    min="0" max="5000" step="1" value="0"
+                    placeholder="0"
+                    aria-describedby="public-km-hint">
+                  <span class="input-unit">km / month</span>
+                </div>
+              </div>
+              <div class="slider-row" aria-hidden="true">
+                <input type="range" id="public-km-slider" min="0" max="1000" step="10" value="0"
+                  aria-label="Public transport slider" tabindex="-1">
+                <span class="slider-val" id="public-km-val">0</span>
+              </div>
+              <p id="public-km-hint" class="label-medium" style="color:var(--md-on-surface-variant)">0 – 5,000 km</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Energy -->
+        <section class="calc-section" aria-labelledby="energy-heading">
+          <div class="section-header">
+            <span class="material-symbols-outlined" aria-hidden="true">bolt</span>
+            <h2 id="energy-heading">Energy</h2>
+          </div>
+          <div class="field-group">
+
+            <div class="field-row">
+              <div class="field-wrap">
+                <label for="electricity">Electricity</label>
+                <div class="input-box">
+                  <span class="field-icon material-symbols-outlined" aria-hidden="true">electrical_services</span>
+                  <input type="number" id="electricity" name="electricity"
+                    min="0" max="10000" step="1" value="0"
+                    placeholder="0"
+                    aria-describedby="elec-hint">
+                  <span class="input-unit">kWh / month</span>
+                </div>
+              </div>
+              <div class="slider-row" aria-hidden="true">
+                <input type="range" id="electricity-slider" min="0" max="1000" step="10" value="0"
+                  aria-label="Electricity slider" tabindex="-1">
+                <span class="slider-val" id="elec-val">0</span>
+              </div>
+              <p id="elec-hint" class="label-medium" style="color:var(--md-on-surface-variant)">0 – 10,000 kWh</p>
+            </div>
+
+            <div class="field-row">
+              <div class="field-wrap">
+                <label for="gas">Natural gas</label>
+                <div class="input-box">
+                  <span class="field-icon material-symbols-outlined" aria-hidden="true">local_fire_department</span>
+                  <input type="number" id="gas" name="gas"
+                    min="0" max="10000" step="1" value="0"
+                    placeholder="0"
+                    aria-describedby="gas-hint">
+                  <span class="input-unit">kWh / month</span>
+                </div>
+              </div>
+              <div class="slider-row" aria-hidden="true">
+                <input type="range" id="gas-slider" min="0" max="1000" step="10" value="0"
+                  aria-label="Gas slider" tabindex="-1">
+                <span class="slider-val" id="gas-val">0</span>
+              </div>
+              <p id="gas-hint" class="label-medium" style="color:var(--md-on-surface-variant)">0 – 10,000 kWh</p>
+            </div>
+
+          </div>
+        </section>
+
+
+        <!-- Diet -->
+        <section class="calc-section" aria-labelledby="diet-heading">
+          <div class="section-header">
+            <span class="material-symbols-outlined" aria-hidden="true">restaurant</span>
+            <h2 id="diet-heading">Diet</h2>
+          </div>
+          <p class="body-medium" style="color:var(--md-on-surface-variant); margin-bottom:16px;">
+            Choose your typical diet pattern:
+          </p>
+          <div class="chip-group" id="diet-chips" role="group" aria-label="Diet type">
+            <button class="chip" data-value="VEGAN" role="checkbox" aria-pressed="false" aria-label="Vegan diet">
+              <span class="check-icon material-symbols-outlined">check</span>
+              🌱 Vegan
+            </button>
+            <button class="chip selected" data-value="MODERATE_MEAT" role="checkbox" aria-pressed="true" aria-label="Moderate meat diet, currently selected">
+              <span class="check-icon material-symbols-outlined">check</span>
+              🥗 Moderate
+            </button>
+            <button class="chip" data-value="HEAVY_MEAT" role="checkbox" aria-pressed="false" aria-label="Heavy meat diet">
+              <span class="check-icon material-symbols-outlined">check</span>
+              🥩 Heavy Meat
+            </button>
+          </div>
+        </section>
+
+        <!-- Shopping -->
+        <section class="calc-section" aria-labelledby="shopping-heading">
+          <div class="section-header">
+            <span class="material-symbols-outlined" aria-hidden="true">shopping_bag</span>
+            <h2 id="shopping-heading">Shopping</h2>
+          </div>
+          <p class="body-medium" style="color:var(--md-on-surface-variant); margin-bottom:16px;">
+            How much do you shop for goods (clothes, electronics, etc.)?
+          </p>
+          <div class="chip-group" id="shopping-chips" role="group" aria-label="Shopping level">
+            <button class="chip" data-value="LOW" role="checkbox" aria-pressed="false" aria-label="Low shopping">
+              <span class="check-icon material-symbols-outlined">check</span>
+              Low
+            </button>
+            <button class="chip selected" data-value="MEDIUM" role="checkbox" aria-pressed="true" aria-label="Medium shopping, currently selected">
+              <span class="check-icon material-symbols-outlined">check</span>
+              Medium
+            </button>
+            <button class="chip" data-value="HIGH" role="checkbox" aria-pressed="false" aria-label="High shopping">
+              <span class="check-icon material-symbols-outlined">check</span>
+              High
+            </button>
+          </div>
+        </section>
+
+        <!-- Save button -->
+        <button id="save-btn" class="btn btn--filled" style="align-self:flex-start; height:48px; padding:0 32px; font-size:16px;">
+          <span class="material-symbols-outlined">save</span>
+          Calculate &amp; Save
+        </button>
+
+      </div><!-- /form col -->
+
+      <!-- Right: Live Gauge -->
+      <aside class="calc-gauge-col" aria-label="Live CO2 gauge">
+        <div class="gauge-container">
+          <div class="gauge-total" id="gauge-total" aria-live="polite" aria-atomic="true">0</div>
+          <div class="gauge-unit">kg CO₂ / month</div>
+
+          <div class="gauge-bar-wrap"
+            id="gauge-bar"
+            role="img"
+            aria-label="CO2 gauge showing 0 kg per month">
+            <div class="gauge-bar-fill" id="gauge-fill"></div>
+          </div>
+
+          <div id="gauge-badge" class="badge badge--low" aria-live="polite">Low</div>
+
+          <!-- Category breakdown -->
+          <div class="breakdown-list" aria-label="Emission breakdown by category">
+
+            <div class="breakdown-item" data-bar="transport">
+              <div class="breakdown-label">
+                <span>🚗 Transport</span>
+                <span class="kg">0 kg</span>
+              </div>
+              <div class="progress-bar" role="progressbar" aria-label="Transport emissions" aria-valuenow="0">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-item" data-bar="energy">
+              <div class="breakdown-label">
+                <span>⚡ Energy</span>
+                <span class="kg">0 kg</span>
+              </div>
+              <div class="progress-bar" role="progressbar" aria-label="Energy emissions" aria-valuenow="0">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-item" data-bar="diet">
+              <div class="breakdown-label">
+                <span>🥗 Diet</span>
+                <span class="kg">0 kg</span>
+              </div>
+              <div class="progress-bar" role="progressbar" aria-label="Diet emissions" aria-valuenow="0">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+
+            <div class="breakdown-item" data-bar="shopping">
+              <div class="breakdown-label">
+                <span>🛍️ Shopping</span>
+                <span class="kg">0 kg</span>
+              </div>
+              <div class="progress-bar" role="progressbar" aria-label="Shopping emissions" aria-valuenow="0">
+                <div class="progress-bar__fill"></div>
+              </div>
+            </div>
+
+          </div><!-- /breakdown -->
+
+          <!-- Tips link -->
+          <a href="tips.html" class="btn btn--tonal" style="width:100%; justify-content:center; margin-top:4px;">
+            <span class="material-symbols-outlined">lightbulb</span>
+            Get AI tips
+          </a>
+        </div>
+      </aside>
+
+    </div><!-- /layout -->
+  </main>
+
+  <!-- Snackbar -->
+  <div class="snackbar" id="snackbar" role="status" aria-live="polite">
+    <span class="snackbar__msg"></span>
+    <button class="snackbar__action" style="display:none"></button>
+  </div>
+
+  <script type="module" src="js/ripple.js"></script>
+  <script type="module" src="js/calculator.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your EcoTrace — Dashboard</title>
+  <meta name="description" content="Track your carbon footprint over time with beautiful charts. Compare against India and world averages.">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
+    connect-src https://generativelanguage.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    img-src 'self' data:;
+  ">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="top-app-bar" role="banner">
+    <a href="index.html" class="top-app-bar__brand" aria-label="EcoTrace home">
+      <img src="assets/logo.svg" alt="" width="28" height="34" aria-hidden="true">
+      <span class="top-app-bar__wordmark">Eco<span>Trace</span></span>
+    </a>
+    <nav class="top-app-bar__nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="dashboard.html" class="active" aria-current="page">Dashboard</a>
+      <a href="tips.html">AI Tips</a>
+    </nav>
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </header>
+
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">home</span></span>
+      <span>Home</span>
+    </a>
+    <a href="calculator.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">calculate</span></span>
+      <span>Calculator</span>
+    </a>
+    <a href="dashboard.html" class="bottom-nav__item active" aria-current="page">
+      <span class="indicator"><span class="material-symbols-outlined">insights</span></span>
+      <span>Dashboard</span>
+    </a>
+    <a href="tips.html" class="bottom-nav__item">
+      <span class="indicator"><span class="material-symbols-outlined">eco</span></span>
+      <span>AI Tips</span>
+    </a>
+  </nav>
+
+  <main id="main" class="page-wrap">
+    <div class="dashboard-wrap">
+
+      <div class="dashboard-title">
+        <h1 class="headline-large">Your EcoTrace</h1>
+        <p class="body-large" style="color:var(--md-on-surface-variant); margin-top:6px;">
+          Your personal carbon footprint history
+        </p>
+      </div>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="empty-state" hidden>
+        <div class="empty-leaf" aria-hidden="true"></div>
+        <h2 class="headline-medium">No data yet</h2>
+        <p class="body-large">Start by calculating your carbon footprint to see insights here.</p>
+        <a href="calculator.html" class="btn btn--filled" id="empty-cta">
+          <span class="material-symbols-outlined">calculate</span>
+          Calculate now
+        </a>
+      </div>
+
+      <!-- Dashboard content -->
+      <div id="dashboard-content" hidden>
+
+        <!-- Stats row -->
+        <div class="stats-row" aria-label="Summary statistics">
+          <div class="card card--outlined stat-card">
+            <div class="label">This month</div>
+            <div class="value" id="stat-this-month">—</div>
+            <div class="delta delta--neutral">CO₂ / month</div>
+          </div>
+          <div class="card card--outlined stat-card">
+            <div class="label">vs Last Entry</div>
+            <div class="value" style="font-size:24px;" id="stat-vs-last">—</div>
+            <div class="delta delta--neutral" id="delta-last">change</div>
+          </div>
+          <div class="card card--outlined stat-card">
+            <div class="label">vs India Avg</div>
+            <div class="value" style="font-size:24px;" id="stat-vs-india">—</div>
+            <div class="delta delta--neutral">125 kg/month avg</div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <h2 class="title-medium">Your footprint over time</h2>
+            <div style="height:280px; position:relative;">
+              <canvas id="line-chart"
+                aria-label="Line chart showing your CO2 footprint over time"
+                role="img"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h2 class="title-medium">Latest breakdown</h2>
+            <div style="height:280px; position:relative;">
+              <canvas id="pie-chart"
+                aria-label="Doughnut chart showing emission breakdown by category"
+                role="img"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- History table -->
+        <section class="history-section" aria-labelledby="history-heading">
+          <h2 id="history-heading" class="headline-medium" style="margin-bottom:16px;">History</h2>
+          <div style="overflow-x:auto;">
+            <table class="history-table" aria-label="Footprint history records">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Total (kg)</th>
+                  <th scope="col">Transport</th>
+                  <th scope="col">Energy</th>
+                  <th scope="col">Diet</th>
+                  <th scope="col"><span class="sr-only">Delete</span></th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody"></tbody>
+            </table>
+          </div>
+        </section>
+
+      </div><!-- /dashboard-content -->
+    </div>
+  </main>
+
+  <!-- sr-only utility -->
+  <style>.sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }</style>
+
+  <script type="module" src="js/ripple.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

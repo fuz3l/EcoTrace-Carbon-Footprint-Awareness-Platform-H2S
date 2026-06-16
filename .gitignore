@@ -1,0 +1,10 @@
+# Dependencies / build output
+node_modules/
+
+# Local environment — contains Gemini API key
+# Copy env.example.js → env.js and add your key there
+env.js
+
+# OS junk
+.DS_Store
+Thumbs.db
