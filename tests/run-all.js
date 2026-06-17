@@ -1,37 +1,23 @@
 /**
- * @fileoverview Master test runner for EcoTrace.
+ * @fileoverview Safe master test runner.
  * Run with: node tests/run-all.js
  */
 
-const { execSync } = require('child_process');
-const path = require('path');
+console.log('=== Running EcoTrace Test Suite ===\n');
 
-const tests = [
-  'test-co2.js',
-  'test-storage.js',
-  'test-tips.js'
-];
+try {
+  console.log('▶ Running test-co2.js...');
+  require('./test-co2.js');
+  
+  console.log('\n▶ Running test-storage.js...');
+  require('./test-storage.js');
+  
+  console.log('\n▶ Running test-tips.js...');
+  require('./test-tips.js');
 
-let allPassed = true;
-
-console.log('=== Running EcoTrace Test Suite ===');
-
-tests.forEach(testFile => {
-  const fullPath = path.join(__dirname, testFile);
-  console.log(`\n▶ Running ${testFile}...`);
-  try {
-    execSync(`node "${fullPath}"`, { stdio: 'inherit' });
-  } catch (err) {
-    allPassed = false;
-    console.error(`\n❌ ${testFile} failed.`);
-  }
-});
-
-console.log('\n===================================');
-if (allPassed) {
+  console.log('\n===================================');
   console.log('✅ All test suites passed!');
-  process.exit(0);
-} else {
-  console.error('❌ Some test suites failed.');
+} catch (e) {
+  console.error('\n❌ Test run failed:', e.message);
   process.exit(1);
 }
