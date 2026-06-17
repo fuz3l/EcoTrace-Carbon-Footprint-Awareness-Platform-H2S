@@ -135,16 +135,7 @@ function iconFor(category) {
   return ICONS[category.toLowerCase()] ?? 'eco';
 }
 
-/**
- * Escape text for safe DOM insertion.
- * @param {string} str
- * @returns {string}
- */
-function sanitize(str) {
-  const d = document.createElement('div');
-  d.textContent = String(str);
-  return d.innerHTML;
-}
+
 
 /**
  * Show skeleton loading cards (brief, just for perceived polish).
@@ -153,15 +144,35 @@ function showSkeletons() {
   const container = document.getElementById('tips-container');
   if (!container) return;
   container.setAttribute('aria-busy', 'true');
-  container.innerHTML = Array.from({ length: 3 }, () => `
-    <div class="card skeleton-card" aria-hidden="true">
-      <div class="skeleton skeleton-icon"></div>
-      <div class="skeleton skeleton-line skeleton-line--lg"></div>
-      <div class="skeleton skeleton-line"></div>
-      <div class="skeleton skeleton-line"></div>
-      <div class="skeleton skeleton-line--sm"></div>
-    </div>
-  `).join('');
+  container.innerHTML = ''; // safe clear
+  
+  for (let i = 0; i < 3; i++) {
+    const card = document.createElement('div');
+    card.className = 'card skeleton-card';
+    card.setAttribute('aria-hidden', 'true');
+
+    const icon = document.createElement('div');
+    icon.className = 'skeleton skeleton-icon';
+    card.appendChild(icon);
+
+    const line1 = document.createElement('div');
+    line1.className = 'skeleton skeleton-line skeleton-line--lg';
+    card.appendChild(line1);
+
+    const line2 = document.createElement('div');
+    line2.className = 'skeleton skeleton-line';
+    card.appendChild(line2);
+
+    const line3 = document.createElement('div');
+    line3.className = 'skeleton skeleton-line';
+    card.appendChild(line3);
+
+    const line4 = document.createElement('div');
+    line4.className = 'skeleton skeleton-line--sm';
+    card.appendChild(line4);
+
+    container.appendChild(card);
+  }
 }
 
 /**
@@ -172,25 +183,53 @@ function renderTips(tips) {
   const container = document.getElementById('tips-container');
   if (!container) return;
   container.setAttribute('aria-busy', 'false');
-  container.innerHTML = tips.map(t => `
-    <article class="card tip-card">
-      <div class="tip-card__top">
-        <div class="tip-icon" aria-hidden="true">
-          <span class="material-symbols-outlined">${iconFor(t.category)}</span>
-        </div>
-        <h3 class="tip-card__title title-medium">${sanitize(t.category)}</h3>
-      </div>
-      <p class="tip-card__body body-large">${sanitize(t.tip)}</p>
-      <div class="tip-card__footer">
-        <span class="badge badge--${sanitize(t.impact)}">
-          <span class="material-symbols-outlined" style="font-size:14px">
-            ${t.impact === 'high' ? 'priority_high' : t.impact === 'medium' ? 'trending_up' : 'check_circle'}
-          </span>
-          ${sanitize(t.impact)} impact
-        </span>
-      </div>
-    </article>
-  `).join('');
+  container.innerHTML = ''; // safe clear
+  
+  tips.forEach(t => {
+    const article = document.createElement('article');
+    article.className = 'card tip-card';
+
+    const top = document.createElement('div');
+    top.className = 'tip-card__top';
+
+    const iconDiv = document.createElement('div');
+    iconDiv.className = 'tip-icon';
+    iconDiv.setAttribute('aria-hidden', 'true');
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'material-symbols-outlined';
+    iconSpan.textContent = iconFor(t.category);
+    iconDiv.appendChild(iconSpan);
+    top.appendChild(iconDiv);
+
+    const title = document.createElement('h3');
+    title.className = 'tip-card__title title-medium';
+    title.textContent = t.category;
+    top.appendChild(title);
+    article.appendChild(top);
+
+    const body = document.createElement('p');
+    body.className = 'tip-card__body body-large';
+    body.textContent = t.tip;
+    article.appendChild(body);
+
+    const footer = document.createElement('div');
+    footer.className = 'tip-card__footer';
+    
+    const badge = document.createElement('span');
+    badge.className = `badge badge--${t.impact}`;
+    
+    const badgeIcon = document.createElement('span');
+    badgeIcon.className = 'material-symbols-outlined';
+    badgeIcon.style.fontSize = '14px';
+    badgeIcon.textContent = t.impact === 'high' ? 'priority_high' : t.impact === 'medium' ? 'trending_up' : 'check_circle';
+    
+    badge.appendChild(badgeIcon);
+    badge.appendChild(document.createTextNode(` ${t.impact} impact`));
+    footer.appendChild(badge);
+    article.appendChild(footer);
+
+    container.appendChild(article);
+  });
 }
 
 /* ── Main loader ─────────────────────────────────────────── */

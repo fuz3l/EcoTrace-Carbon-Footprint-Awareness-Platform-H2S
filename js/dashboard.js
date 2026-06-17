@@ -189,31 +189,58 @@ function renderTable(history) {
   const tbody = document.getElementById('history-tbody');
   if (!tbody) return;
 
+  tbody.innerHTML = ''; // safe clear
+
   if (history.length === 0) {
-    tbody.innerHTML = `
-      <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--md-on-surface-variant)">
-        No records yet.
-      </td></tr>`;
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    td.colSpan = 6;
+    td.style.cssText = 'text-align:center;padding:32px;color:var(--md-on-surface-variant)';
+    td.textContent = 'No records yet.';
+    tr.appendChild(td);
+    tbody.appendChild(tr);
     return;
   }
 
-  tbody.innerHTML = [...history].reverse().map(r => `
-    <tr>
-      <td>${r.date}</td>
-      <td>${fmt(r.total)}</td>
-      <td>${fmt(r.transport)}</td>
-      <td>${fmt(r.energy)}</td>
-      <td>${fmt(r.diet)}</td>
-      <td>
-        <button class="icon-btn danger" data-delete="${r.id}"
-          aria-label="Delete record from ${r.date}">
-          <span class="material-symbols-outlined">delete</span>
-        </button>
-      </td>
-    </tr>
-  `).join('');
+  [...history].reverse().forEach(r => {
+    const tr = document.createElement('tr');
+    
+    const tdDate = document.createElement('td');
+    tdDate.textContent = r.date;
+    tr.appendChild(tdDate);
 
-  /* Delegate delete clicks */
+    const tdTotal = document.createElement('td');
+    tdTotal.textContent = fmt(r.total);
+    tr.appendChild(tdTotal);
+
+    const tdTransport = document.createElement('td');
+    tdTransport.textContent = fmt(r.transport);
+    tr.appendChild(tdTransport);
+
+    const tdEnergy = document.createElement('td');
+    tdEnergy.textContent = fmt(r.energy);
+    tr.appendChild(tdEnergy);
+
+    const tdDiet = document.createElement('td');
+    tdDiet.textContent = fmt(r.diet);
+    tr.appendChild(tdDiet);
+
+    const tdAction = document.createElement('td');
+    const btn = document.createElement('button');
+    btn.className = 'icon-btn danger';
+    btn.dataset.delete = r.id;
+    btn.setAttribute('aria-label', `Delete record from ${r.date}`);
+    const icon = document.createElement('span');
+    icon.className = 'material-symbols-outlined';
+    icon.textContent = 'delete';
+    btn.appendChild(icon);
+    tdAction.appendChild(btn);
+    tr.appendChild(tdAction);
+
+    tbody.appendChild(tr);
+  });
+
+  /* Delegate delete clicks (added only once outside in a better implementation, but keeping it here for minimal changes since we clear tbody) */
   tbody.addEventListener('click', e => {
     const btn = e.target.closest('[data-delete]');
     if (!btn) return;
