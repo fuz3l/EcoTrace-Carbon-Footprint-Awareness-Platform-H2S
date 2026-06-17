@@ -3,6 +3,7 @@
  * stats cards, history table with delete, and empty state.
  * @module dashboard
  */
+"use strict";
 
 import { getHistory, deleteRecord } from './storage.js';
 import { CO2 } from './config.js';

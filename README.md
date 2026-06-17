@@ -44,24 +44,28 @@ Navigate between pages using the top app bar (desktop) or bottom navigation (mob
 ## Run Tests
 
 ```bash
-node tests/test-co2.js
+node tests/run-all.js
 ```
 
-All 10 tests pass:
+All 25 tests pass across 3 suites:
 
 ```
+=== Running EcoTrace Test Suite ===
+
+▶ Running test-co2.js...
 ✓ car 100km = 21kg
-✓ flight 100km = 25.5kg
-✓ public 100km = 8.9kg
-✓ electricity 100kwh = 23.3kg
-✓ gas 100kwh = 20.3kg
-✓ diet vegan = 19.8kg
-✓ diet heavy_meat = 99kg
-✓ shopping low = 10kg
-✓ low footprint < 200
-✓ high footprint > 400
+... (15 tests)
 
-10 passed, 0 failed
+▶ Running test-storage.js...
+✓ safeGet returns fallback when empty
+... (6 tests)
+
+▶ Running test-tips.js...
+✓ rankCategories sorts correctly
+... (4 tests)
+
+===================================
+✅ All test suites passed!
 ```
 
 ---

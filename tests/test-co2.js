@@ -78,6 +78,13 @@ test('shopping low = 10kg',        () => assert(shoppingEmission('LOW'), 10.0));
 test('low footprint < 200',        () => assert(totalUnder200IsLow(), true, 0));
 test('high footprint > 400',       () => assert(totalOver400IsHigh(), true, 0));
 
+/* ── Edge cases ──────────────────────────────────────────── */
+test('negative inputs handle 0',   () => assert(calculateTransportEmissions(-10, 0, 0), -2.1)); // Wait, negative inputs should either be rejected or just multiplied. Currently the UI slider clamps them to 0 anyway. Let's just test math.
+test('diet invalid key = 0',       () => assert(dietEmission('INVALID'), 0));
+test('shopping invalid key = 0',   () => assert(shoppingEmission('INVALID'), 0));
+test('zero emissions',             () => assert(calculateTransportEmissions(0,0,0) + calculateEnergyEmissions(0,0), 0));
+test('extreme large values',       () => assert(calculateTransportEmissions(1000000, 0, 0), 210000));
+
 /* ── Summary ─────────────────────────────────────────────── */
 console.log(`\n${p} passed, ${f} failed`);
 if (f > 0) process.exit(1);

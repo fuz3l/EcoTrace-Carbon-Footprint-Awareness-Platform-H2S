@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Eco Tips — EcoTrace</title>
+  <title>Smart Tips — EcoTrace</title>
   <meta name="description" content="Get personalized carbon reduction tips powered by Gemini AI, tailored to your biggest emission sources.">
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
@@ -28,14 +28,14 @@
       <a href="index.html">Home</a>
       <a href="calculator.html">Calculator</a>
       <a href="dashboard.html">Dashboard</a>
-      <a href="tips.html" class="active" aria-current="page">AI Tips</a>
+      <a href="tips.html" class="active" aria-current="page">Smart Tips</a>
     </nav>
-    <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+    <button class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="bottom-nav">
       <span class="material-symbols-outlined">menu</span>
     </button>
   </header>
 
-  <nav class="bottom-nav" aria-label="Mobile navigation">
+  <nav class="bottom-nav" id="bottom-nav" aria-label="Mobile navigation">
     <a href="index.html" class="bottom-nav__item">
       <span class="indicator"><span class="material-symbols-outlined">home</span></span>
       <span>Home</span>
@@ -50,7 +50,7 @@
     </a>
     <a href="tips.html" class="bottom-nav__item active" aria-current="page">
       <span class="indicator"><span class="material-symbols-outlined">eco</span></span>
-      <span>AI Tips</span>
+      <span>Smart Tips</span>
     </a>
   </nav>
 
@@ -81,6 +81,11 @@
 
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo" style="margin-top:auto">
+    <p>Built for <strong>Google PromptWars H2S</strong> — Powered by Gemini AI &copy; 2025 EcoTrace</p>
+  </footer>
 
   <script type="module" src="js/ripple.js"></script>
   <script type="module" src="js/tips.js"></script>

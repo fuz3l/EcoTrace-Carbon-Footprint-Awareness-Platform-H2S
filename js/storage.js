@@ -3,10 +3,10 @@
  * All reads/writes go through here so corrupt data is handled centrally.
  * @module storage
  */
+"use strict";
 
 const KEYS = {
   HISTORY: 'ecotrace_history',
-  TIPS_CACHE: 'ecotrace_tips_cache',
 };
 
 /**
@@ -76,32 +76,3 @@ export function clearHistory() {
   localStorage.removeItem(KEYS.HISTORY);
 }
 
-/* ── Tips cache ─────────────────────────────────────────────── */
-
-const TIPS_TTL = 3_600_000; // 1 hour in ms
-
-/**
- * Get cached AI tips if still valid.
- * @returns {Array|null} Array of tip objects, or null if expired/missing.
- */
-export function getCachedTips() {
-  const cache = safeGet(KEYS.TIPS_CACHE, null);
-  if (!cache) return null;
-  if (Date.now() - cache.timestamp > TIPS_TTL) return null;
-  return cache.tips;
-}
-
-/**
- * Save AI tips to cache with a timestamp.
- * @param {Array} tips
- */
-export function cacheTips(tips) {
-  safeSet(KEYS.TIPS_CACHE, { tips, timestamp: Date.now() });
-}
-
-/**
- * Invalidate the tips cache.
- */
-export function clearTipsCache() {
-  localStorage.removeItem(KEYS.TIPS_CACHE);
-}

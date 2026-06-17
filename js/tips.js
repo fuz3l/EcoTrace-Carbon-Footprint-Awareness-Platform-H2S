@@ -4,6 +4,7 @@
  * highest emission categories. No API key or network request required.
  * @module tips
  */
+"use strict";
 
 import { getHistory } from './storage.js';
 import { CO2 } from './config.js';

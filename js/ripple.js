@@ -3,6 +3,7 @@
  * Attaches on DOMContentLoaded to all .btn and .icon-btn elements.
  * @module ripple
  */
+"use strict";
 
 /**
  * Create and play a ripple effect on a target element.

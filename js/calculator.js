@@ -3,6 +3,7 @@
  * real-time breakdown bars, and save-to-history.
  * @module calculator
  */
+"use strict";
 
 import { CO2, INPUT_LIMITS, CATEGORY_ICONS } from './config.js';
 import { saveRecord } from './storage.js';

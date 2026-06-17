@@ -1,10 +1,30 @@
 /**
- * @fileoverview EcoTrace CO2 emission coefficients and thresholds.
- * All constants here — never hardcode values elsewhere.
+ * @fileoverview Configuration constants for EcoTrace, primarily CO2 emission factors.
  * @module config
  */
+"use strict";
 
-/** @type {Object} CO2 emission factors per activity unit */
+/**
+ * CO2 Emission coefficients.
+ * Single source of truth for all calculations.
+ * @constant
+ * @type {Object}
+ * @property {Object} TRANSPORT - Transportation emission factors (kg CO2 per km)
+ * @property {number} TRANSPORT.CAR_PER_KM - Factor for car travel (0.21)
+ * @property {number} TRANSPORT.FLIGHT_PER_KM - Factor for flights (0.255)
+ * @property {number} TRANSPORT.PUBLIC_PER_KM - Factor for public transport (0.089)
+ * @property {Object} ENERGY - Energy emission factors (kg CO2 per kWh)
+ * @property {number} ENERGY.ELECTRICITY_PER_KWH - Factor for electricity in India (0.233)
+ * @property {number} ENERGY.GAS_PER_KWH - Factor for natural gas (0.203)
+ * @property {Object} DIET - Diet emission factors (kg CO2 per month)
+ * @property {number} DIET.VEGAN - Factor for a vegan diet (19.8)
+ * @property {number} DIET.MODERATE_MEAT - Factor for a moderate meat diet (59.4)
+ * @property {number} DIET.HEAVY_MEAT - Factor for a heavy meat diet (99.0)
+ * @property {Object} SHOPPING - Shopping emission factors (kg CO2 per month)
+ * @property {number} SHOPPING.LOW - Factor for low shopping habits (10.0)
+ * @property {number} SHOPPING.MEDIUM - Factor for medium shopping habits (25.0)
+ * @property {number} SHOPPING.HIGH - Factor for high shopping habits (45.0)
+ */
 export const CO2 = {
   TRANSPORT: {
     /** kg CO2 per km driven by car */
